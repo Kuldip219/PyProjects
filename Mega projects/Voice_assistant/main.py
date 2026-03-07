@@ -14,11 +14,30 @@ if __name__ == "__main__":
     speak("Hello, I am Gipsy")
 
     while True:
-        with sr.Microphone() as source:
-            print("Listening...")
-            r.adjust_for_ambient_noise(source, duration=0.5)
 
-            audio = r.listen(source, timeout=5, phrase_time_limit=5)
+        try:
+            with sr.Microphone() as source:
+                print("Listening...")
+                r.adjust_for_ambient_noise(source, duration=0.5)
 
-        print("Recognizing...")
+                audio = r.listen(source, timeout=5, phrase_time_limit=5)
+
+            print("Recognizing...")
+            word = r.recognize_google(audio).lower()
+            print(f"You said: {word}")
         
+            if "gipsy" in word:
+                speak("Yes, how can I help you?")
+                print("gipsy is activated")
+    
+        except sr.WaitTimeoutError:
+            print("No speech detected")
+
+        except sr.UnknownValueError:
+            print("Could not understand audio")
+        
+        except sr.RequestError:
+            print("Could not request results from Google Speech Recognition service")
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
