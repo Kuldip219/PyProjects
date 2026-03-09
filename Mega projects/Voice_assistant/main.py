@@ -25,19 +25,14 @@ if __name__ == "__main__":
 
     def processcommand(c):
         if "open youtube" in c:
-            speak("Opening YouTube")
             webbrowser.open("https://www.youtube.com")
         elif "open google" in c:
-            speak("Opening Google")
             webbrowser.open("https://www.google.com")
         elif "open facebook" in c:
-            speak("Opening Facebook")
             webbrowser.open("https://www.facebook.com")
         elif "open instagram" in c:
-            speak("Opening Instagram")
             webbrowser.open("https://www.instagram.com")
         elif "open github" in c:
-            speak("Opening GitHub")
             webbrowser.open("https://www.github.com")
         else:
             print("Asking AI...")
