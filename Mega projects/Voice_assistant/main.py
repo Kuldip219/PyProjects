@@ -2,6 +2,9 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 import os
+from openai import OpenAI
+
+client = OpenAI(api_key="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)")
 
 if __name__ == "__main__":
     engine = pyttsx3.init('sapi5')
@@ -12,6 +15,13 @@ if __name__ == "__main__":
         engine.runAndWait()
 
     r = sr.Recognizer()
+
+    def ask_ai(question):
+        response = client.responses.create(
+            model="gpt-4.1-mini",
+            input=question
+        )
+        return response.output_text
 
     def processcommand(c):
         if "open youtube" in c:
@@ -29,6 +39,12 @@ if __name__ == "__main__":
         elif "open github" in c:
             speak("Opening GitHub")
             webbrowser.open("https://www.github.com")
+        else:
+            print("Asking AI...")
+            answer = ask_ai(c)
+            print(answer)
+            speak(answer)
+
 
     speak("Hello, I am Gipsy")
 
