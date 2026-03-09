@@ -1,5 +1,7 @@
 import speech_recognition as sr
+import webbrowser
 import pyttsx3
+import os
 
 if __name__ == "__main__":
     engine = pyttsx3.init('sapi5')
@@ -10,6 +12,23 @@ if __name__ == "__main__":
         engine.runAndWait()
 
     r = sr.Recognizer()
+
+    def processcommand(c):
+        if "open youtube" in c:
+            speak("Opening YouTube")
+            webbrowser.open("https://www.youtube.com")
+        elif "open google" in c:
+            speak("Opening Google")
+            webbrowser.open("https://www.google.com")
+        elif "open facebook" in c:
+            speak("Opening Facebook")
+            webbrowser.open("https://www.facebook.com")
+        elif "open instagram" in c:
+            speak("Opening Instagram")
+            webbrowser.open("https://www.instagram.com")
+        elif "open github" in c:
+            speak("Opening GitHub")
+            webbrowser.open("https://www.github.com")
 
     speak("Hello, I am Gipsy")
 
@@ -29,6 +48,13 @@ if __name__ == "__main__":
             if "gipsy" in word:
                 speak("Yes, how can I help you?")
                 print("gipsy is activated")
+                with sr.Microphone() as source:
+                    print("Listening for command...")
+                    r.adjust_for_ambient_noise(source, duration=0.5)
+                    audio = r.listen(source, timeout=5, phrase_time_limit=5)
+                    command = r.recognize_google(audio).lower()
+
+                    processcommand(command)
     
         except sr.WaitTimeoutError:
             print("No speech detected")
