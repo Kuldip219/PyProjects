@@ -26,9 +26,16 @@ bullet_speed = 1
 # Enemy settings
 enemy_width = 40
 enemy_height = 40
-enemy_x = random.randint(0, WIDTH - enemy_width)
-enemy_y = 0
 enemy_speed = 0.1
+
+# Create multiple enemies
+enemies = []
+num_enemies = 4
+
+for _ in range(num_enemies):
+    enemy_x = random.randint(0, WIDTH - enemy_width)
+    enemy_y = random.randint(-150, -40)
+    enemies.append([enemy_x, enemy_y])
 
 # Game loop
 running = True
@@ -57,31 +64,39 @@ while running:
         player_x = WIDTH - player_width
 
     # Enemy Movement
-    enemy_y += enemy_speed
-    if enemy_y > HEIGHT:
-        enemy_y = 0
-        enemy_x = random.randint(0, WIDTH - enemy_width)
+    # enemy_y += enemy_speed
+    # if enemy_y > HEIGHT:
+    #     enemy_y = 0
+    #     enemy_x = random.randint(0, WIDTH - enemy_width)
+    for enemy in enemies:
+        enemy[1] += enemy_speed
+
+        if enemy[1] > HEIGHT:
+            enemy[1] = random.randint(-200, 0)
+            enemy[0] = random.randint(0, WIDTH - enemy_width)
         
     # Draw player
     pygame.draw.rect(screen, (0, 255, 0), (player_x, player_y, player_width, player_height))
 
     # Draw enemy
-    pygame.draw.rect(screen, (0, 0, 255), (enemy_x, enemy_y, enemy_width, enemy_height))
+    for enemy in enemies:
+        pygame.draw.rect(screen, (0, 0, 255), (enemy[0], enemy[1], enemy_width, enemy_height))
     
     # Move bullets
     for bullet in bullets:
         bullet[1] -= bullet_speed
         # Collision check
-        if (bullet[0] > enemy_x and bullet[0] < enemy_x + enemy_width and
-            bullet[1] > enemy_y and bullet[1] < enemy_y + enemy_height):
+        for enemy in enemies:
+            if (bullet[0] > enemy[0] and bullet[0] < enemy[0] + enemy_width and
+                bullet[1] > enemy[1] and bullet[1] < enemy[1] + enemy_height):
 
-            bullets.remove(bullet)
+                if bullet in bullets:
+                    bullets.remove(bullet)
 
-            score += 1
+                enemy[1] = random.randint(-200, 0)
+                enemy[0] = random.randint(0, WIDTH - enemy_width)
 
-            # Reset enemy
-            enemy_y = 0
-            enemy_x = random.randint(0, WIDTH - enemy_width)
+                score += 1
     
     # Draw bullets
     for bullet in bullets:
