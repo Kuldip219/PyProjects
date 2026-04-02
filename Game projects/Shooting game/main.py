@@ -40,6 +40,10 @@ while running:
         player_x -= player_speed
     if keys[pygame.K_RIGHT]:
         player_x += player_speed
+    if player_x < 0:
+        player_x = 0
+    if player_x > WIDTH - player_width:
+        player_x = WIDTH - player_width
         
     # Draw player
     pygame.draw.rect(screen, (0, 255, 0), (player_x, player_y, player_width, player_height))
