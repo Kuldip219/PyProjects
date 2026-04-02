@@ -3,14 +3,37 @@ import random
 
 pygame.init()
 
-score = 0
-font = pygame.font.SysFont(None, 36)
-
 # Screen settings
 WIDTH = 800
 HEIGHT = 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Shooting Game")
+
+# Function to reset the game
+def reset_game():
+    global player_x, bullets, enemies, score, player_health, game_over
+
+    player_x = WIDTH // 2
+    bullets = []
+
+    enemies = []
+    for i in range(5):
+        x = random.randint(0, WIDTH - 50)
+        y = random.randint(-600, 0)
+        enemies.append([x, y])
+
+    score = 0
+    player_health = 5
+    game_over = False
+
+# Score settings
+score = 0
+font = pygame.font.SysFont(None, 36)
+
+# Health settings
+player_health = 5
+max_health = 5
+game_over = False
 
 # Player settings
 player_width = 50
@@ -64,24 +87,29 @@ while running:
         player_x = WIDTH - player_width
 
     # Enemy Movement
-    # enemy_y += enemy_speed
-    # if enemy_y > HEIGHT:
-    #     enemy_y = 0
-    #     enemy_x = random.randint(0, WIDTH - enemy_width)
     for enemy in enemies:
         enemy[1] += enemy_speed
 
+        # Collision with player
+        if (enemy[0] < player_x + player_width and
+            enemy[0] + enemy_width > player_x and
+            enemy[1] < player_y + player_height and
+            enemy[1] + enemy_height > player_y):
+
+            player_health -= 1
+
+            # Reset enemy after hit
+            enemy[1] = random.randint(-200, 0)
+            enemy[0] = random.randint(0, WIDTH - enemy_width)
+
+            if player_health <= 0:
+                game_over = True
+
+        # Respawn enemy if it goes off screen
         if enemy[1] > HEIGHT:
             enemy[1] = random.randint(-200, 0)
             enemy[0] = random.randint(0, WIDTH - enemy_width)
         
-    # Draw player
-    pygame.draw.rect(screen, (0, 255, 0), (player_x, player_y, player_width, player_height))
-
-    # Draw enemy
-    for enemy in enemies:
-        pygame.draw.rect(screen, (0, 0, 255), (enemy[0], enemy[1], enemy_width, enemy_height))
-    
     # Move bullets
     for bullet in bullets:
         bullet[1] -= bullet_speed
@@ -97,6 +125,12 @@ while running:
                 enemy[0] = random.randint(0, WIDTH - enemy_width)
 
                 score += 1
+    # Draw player
+    pygame.draw.rect(screen, (0, 255, 0), (player_x, player_y, player_width, player_height))
+
+    # Draw enemy
+    for enemy in enemies:
+        pygame.draw.rect(screen, (0, 0, 255), (enemy[0], enemy[1], enemy_width, enemy_height))
     
     # Draw bullets
     for bullet in bullets:
@@ -105,6 +139,19 @@ while running:
     # Draw score
     score_text = font.render(f"Score: {score}", True, (255, 255, 255))
     screen.blit(score_text, (10, 10))
+
+    # Draw health bar
+    pygame.draw.rect(screen, (255, 0, 0), (10, 50, 200, 20))
+    health_width = (player_health / max_health) * 200
+    pygame.draw.rect(screen, (0, 255, 0), (10, 50, health_width, 20))
+
+    # Score / Game Over
+    if not game_over:
+        score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+        screen.blit(score_text, (10, 10))
+    else:
+        game_over_text = font.render("GAME OVER", True, (255, 0, 0))
+        screen.blit(game_over_text, (WIDTH//2 - 100, HEIGHT//2))
     
     pygame.display.update()
 
