@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -19,6 +20,13 @@ player_speed = 1
 bullets = []
 bullet_speed = 1
 
+# Enemy settings
+enemy_width = 50
+enemy_height = 50
+enemy_x = random.randint(0, WIDTH - enemy_width)
+enemy_y = 0
+enemy_speed = 3
+
 # Game loop
 running = True
 while running:
@@ -34,7 +42,7 @@ while running:
                 bullet_y = player_y
                 bullets.append([bullet_x, bullet_y])
 
-    # Movement
+    # Player Movement
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         player_x -= player_speed
@@ -44,6 +52,12 @@ while running:
         player_x = 0
     if player_x > WIDTH - player_width:
         player_x = WIDTH - player_width
+
+    # Enemy Movement
+    enemy_y += enemy_speed
+    if enemy_y > HEIGHT:
+        enemy_y = 0
+        enemy_x = random.randint(0, WIDTH - enemy_width)
         
     # Draw player
     pygame.draw.rect(screen, (0, 255, 0), (player_x, player_y, player_width, player_height))
