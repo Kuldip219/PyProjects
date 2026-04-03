@@ -4,13 +4,13 @@ import random
 pygame.init()
 
 # Assets
-player_img = pygame.image.load("Assets/Playership.png")
+player_img = pygame.image.load("Assets/Playership1.png")
 player_img = pygame.transform.scale(player_img, (50, 50))
 
 enemy_img = pygame.image.load("Assets/Enemyship.png")
 enemy_img = pygame.transform.scale(enemy_img, (50, 50))
 
-bullet_img = pygame.image.load("Assets/Bullet.png")
+bullet_img = pygame.image.load("Assets/Bullet1.png")
 bullet_img = pygame.transform.scale(bullet_img, (10, 20))
 
 # Screen settings
