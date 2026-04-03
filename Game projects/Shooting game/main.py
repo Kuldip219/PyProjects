@@ -3,6 +3,16 @@ import random
 
 pygame.init()
 
+# Assets
+player_img = pygame.image.load("Assets/Playership.png")
+player_img = pygame.transform.scale(player_img, (50, 50))
+
+enemy_img = pygame.image.load("Assets/Enemyship.png")
+enemy_img = pygame.transform.scale(enemy_img, (50, 50))
+
+bullet_img = pygame.image.load("Assets/Bullet.png")
+bullet_img = pygame.transform.scale(bullet_img, (10, 20))
+
 # Screen settings
 WIDTH = 800
 HEIGHT = 600
@@ -136,15 +146,15 @@ while running:
                     break
 
         # Draw player
-        pygame.draw.rect(screen, (0, 255, 0), (player_x, player_y, player_width, player_height))
+        screen.blit(player_img, (player_x, player_y))
 
         # Draw enemy
         for enemy in enemies:
-            pygame.draw.rect(screen, (0, 0, 255), (enemy[0], enemy[1], enemy_width, enemy_height))
+            screen.blit(enemy_img, (enemy[0], enemy[1]))
         
         # Draw bullets
         for bullet in bullets:
-            pygame.draw.rect(screen, (255, 0, 0), (bullet[0], bullet[1], 5, 10))
+            screen.blit(bullet_img, (bullet[0], bullet[1]))
 
         # Draw health bar
         pygame.draw.rect(screen, (255, 0, 0), (10, 50, 200, 20))
