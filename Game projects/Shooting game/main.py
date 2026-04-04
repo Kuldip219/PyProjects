@@ -3,6 +3,13 @@ import random
 
 pygame.init()
 
+
+# Screen settings
+WIDTH = 480
+HEIGHT = 800
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Shooting Game")
+
 # Assets
 player_img = pygame.image.load("Assets/Playership1.png")
 player_img = pygame.transform.scale(player_img, (50, 50))
@@ -13,11 +20,13 @@ enemy_img = pygame.transform.scale(enemy_img, (50, 50))
 bullet_img = pygame.image.load("Assets/Bullet1.png")
 bullet_img = pygame.transform.scale(bullet_img, (10, 20))
 
-# Screen settings
-WIDTH = 800
-HEIGHT = 600
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Shooting Game")
+bg = pygame.image.load("Assets/Background.png")
+bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
+
+# Scrolling background settings
+bg_y1 = 0
+bg_y2 = -HEIGHT
+bg_speed = 0.5
 
 # Function to reset the game
 def reset_game():
@@ -49,7 +58,7 @@ game_over = False
 player_width = 50
 player_height = 50
 player_x = WIDTH // 2
-player_y = HEIGHT - 60
+player_y = HEIGHT - 80
 player_speed = 0.5
 
 # Bullet settings
@@ -75,7 +84,8 @@ for _ in range(num_enemies):
 # Game loop
 running = True
 while running:
-    screen.fill((0, 0, 0))  # Black background
+    screen.blit(bg, (0, bg_y1))
+    screen.blit(bg, (0, bg_y2))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -103,6 +113,16 @@ while running:
             player_x = 0
         if player_x > WIDTH - player_width:
             player_x = WIDTH - player_width
+        
+        # Scrolling background
+        bg_y1 += bg_speed
+        bg_y2 += bg_speed
+
+        if bg_y1 >= HEIGHT:
+            bg_y1 = -HEIGHT
+        
+        if bg_y2 >= HEIGHT:
+            bg_y2 = -HEIGHT
 
         # Enemy Movement
         for enemy in enemies:
