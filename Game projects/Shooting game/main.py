@@ -26,7 +26,7 @@ bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
 # Scrolling background settings
 bg_y1 = 0
 bg_y2 = -HEIGHT
-bg_speed = 0.5
+bg_speed = 0.1
 
 # Function to reset the game
 def reset_game():
