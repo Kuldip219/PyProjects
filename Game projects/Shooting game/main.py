@@ -20,13 +20,13 @@ enemy_img = pygame.transform.scale(enemy_img, (50, 50))
 bullet_img = pygame.image.load("Assets/Bullet1.png")
 bullet_img = pygame.transform.scale(bullet_img, (10, 20))
 
-bg = pygame.image.load("Assets/Background.png")
-bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
+# bg = pygame.image.load("Assets/Background.png")
+# bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
 
 # Scrolling background settings
-bg_y1 = 0
-bg_y2 = -HEIGHT
-bg_speed = 0.1
+# bg_y1 = 0
+# bg_y2 = -HEIGHT
+# bg_speed = 0.1
 
 # Function to reset the game
 def reset_game():
@@ -84,8 +84,9 @@ for _ in range(num_enemies):
 # Game loop
 running = True
 while running:
-    screen.blit(bg, (0, bg_y1))
-    screen.blit(bg, (0, bg_y2))
+    # screen.blit(bg, (0, bg_y1))
+    # screen.blit(bg, (0, bg_y2))
+    screen.fill((0, 0, 0))  # Clear screen with black background
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -115,14 +116,14 @@ while running:
             player_x = WIDTH - player_width
         
         # Scrolling background
-        bg_y1 += bg_speed
-        bg_y2 += bg_speed
+        # bg_y1 += bg_speed
+        # bg_y2 += bg_speed
 
-        if bg_y1 >= HEIGHT:
-            bg_y1 = -HEIGHT
+        # if bg_y1 >= HEIGHT:
+        #     bg_y1 = -HEIGHT
         
-        if bg_y2 >= HEIGHT:
-            bg_y2 = -HEIGHT
+        # if bg_y2 >= HEIGHT:
+        #     bg_y2 = -HEIGHT
 
         # Enemy Movement
         for enemy in enemies:
