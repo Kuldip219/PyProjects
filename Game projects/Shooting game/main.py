@@ -29,7 +29,7 @@ health_images = [
 ]
 
 # Resize health bar
-health_images = [pygame.transform.scale(img, (200, 50)) for img in health_images]
+health_images = [pygame.transform.scale(img, (200, 70)) for img in health_images]
 
 # Function to reset the game
 def reset_game():
@@ -88,6 +88,7 @@ for _ in range(num_enemies):
 running = True
 while running:
     screen.fill((0, 0, 0))  # Clear screen with black background
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -102,6 +103,7 @@ while running:
             # RESTART GAME
             if event.key == pygame.K_r and game_over:
                 reset_game()
+
     if not game_over:
         # Player Movement
         keys = pygame.key.get_pressed()
@@ -133,6 +135,7 @@ while running:
                 enemy[0] = random.randint(0, WIDTH - enemy_width)
 
                 if player_health <= 0:
+                    player_health = 0
                     game_over = True
 
             # Respawn enemy if it goes off screen
@@ -169,8 +172,7 @@ while running:
             screen.blit(bullet_img, (bullet[0], bullet[1]))
 
         # Draw health bar
-        screen.blit(health_images[player_health], (WIDTH - 150, 10))
-        health_width = (player_health / max_health) * 200
+        screen.blit(health_images[player_health], (10, 50))
 
         # Score / Game Over
         if not game_over:
