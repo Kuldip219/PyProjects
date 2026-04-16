@@ -3,7 +3,6 @@ import random
 
 pygame.init()
 
-
 # Screen settings
 WIDTH = 480
 HEIGHT = 800
@@ -20,13 +19,17 @@ enemy_img = pygame.transform.scale(enemy_img, (50, 50))
 bullet_img = pygame.image.load("Assets/Bullet1.png")
 bullet_img = pygame.transform.scale(bullet_img, (10, 20))
 
-# bg = pygame.image.load("Assets/Background.png")
-# bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
+health_images = [
+    pygame.image.load("Assets/Health_0.png"),
+    pygame.image.load("Assets/Health_1.png"),
+    pygame.image.load("Assets/Health_2.png"),
+    pygame.image.load("Assets/Health_3.png"),
+    pygame.image.load("Assets/Health_4.png"),
+    pygame.image.load("Assets/Health_5.png")
+]
 
-# Scrolling background settings
-# bg_y1 = 0
-# bg_y2 = -HEIGHT
-# bg_speed = 0.1
+# Resize health bar
+health_images = [pygame.transform.scale(img, (200, 50)) for img in health_images]
 
 # Function to reset the game
 def reset_game():
@@ -84,8 +87,6 @@ for _ in range(num_enemies):
 # Game loop
 running = True
 while running:
-    # screen.blit(bg, (0, bg_y1))
-    # screen.blit(bg, (0, bg_y2))
     screen.fill((0, 0, 0))  # Clear screen with black background
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -114,16 +115,6 @@ while running:
             player_x = 0
         if player_x > WIDTH - player_width:
             player_x = WIDTH - player_width
-        
-        # Scrolling background
-        # bg_y1 += bg_speed
-        # bg_y2 += bg_speed
-
-        # if bg_y1 >= HEIGHT:
-        #     bg_y1 = -HEIGHT
-        
-        # if bg_y2 >= HEIGHT:
-        #     bg_y2 = -HEIGHT
 
         # Enemy Movement
         for enemy in enemies:
@@ -150,7 +141,7 @@ while running:
                 enemy[0] = random.randint(0, WIDTH - enemy_width)
             
         # Move bullets
-        for bullet in bullets:
+        for bullet in bullets[:]:
             bullet[1] -= bullet_speed
             # Collision check
             for enemy in enemies:
@@ -172,15 +163,14 @@ while running:
         # Draw enemy
         for enemy in enemies:
             screen.blit(enemy_img, (enemy[0], enemy[1]))
-        
+
         # Draw bullets
         for bullet in bullets:
             screen.blit(bullet_img, (bullet[0], bullet[1]))
 
         # Draw health bar
-        pygame.draw.rect(screen, (255, 0, 0), (10, 50, 200, 20))
+        screen.blit(health_images[player_health], (WIDTH - 150, 10))
         health_width = (player_health / max_health) * 200
-        pygame.draw.rect(screen, (0, 255, 0), (10, 50, health_width, 20))
 
         # Score / Game Over
         if not game_over:
