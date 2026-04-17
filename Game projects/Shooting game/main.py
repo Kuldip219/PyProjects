@@ -4,6 +4,9 @@ global bullets
 
 pygame.init()
 
+font = pygame.font.Font("Assets/arcade.ttf", 36)
+big_font = pygame.font.Font("Assets/arcade.ttf", 64)
+
 # Screen settings
 WIDTH = 480
 HEIGHT = 800
