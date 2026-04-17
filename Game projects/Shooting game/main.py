@@ -4,8 +4,8 @@ global bullets
 
 pygame.init()
 
-font = pygame.font.Font("Assets/arcade.ttf", 36)
-big_font = pygame.font.Font("Assets/arcade.ttf", 64)
+font = pygame.font.Font("Fonts/pixeltype.ttf", 36)
+big_font = pygame.font.Font("Fonts/pixeltype.ttf", 72)
 
 # Screen settings
 WIDTH = 480
@@ -173,16 +173,33 @@ while running:
         # Draw health bar
         screen.blit(health_images[player_health], (10, 50))
 
-        # Score / Game Over
+        # 🎮 SCORE (with shadow)
         if not game_over:
-            score_text = font.render(f"Score: {score}", True, (255, 255, 255))
-            screen.blit(score_text, (10, 10))
+            score_main = font.render(f"Score: {score}", True, (255, 255, 0))  # yellow
+            score_shadow = font.render(f"Score: {score}", True, (0, 0, 0))
+
+            screen.blit(score_shadow, (12, 12))
+            screen.blit(score_main, (10, 10))
+
+        # 💀 GAME OVER SCREEN
         else:
-            game_over_text = font.render("GAME OVER", True, (255, 0, 0))
+            game_over_text = big_font.render("GAME OVER", True, (255, 50, 50))
             restart_text = font.render("Press R to Restart", True, (255, 255, 255))
 
-            screen.blit(game_over_text, (WIDTH//2 - 120, HEIGHT//2 - 20))
-            screen.blit(restart_text, (WIDTH//2 - 150, HEIGHT//2 + 20))
+            # Center text
+            go_rect = game_over_text.get_rect(center=(WIDTH//2, HEIGHT//2 - 40))
+            rs_rect = restart_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 30))
+
+            # Shadows
+            go_shadow = big_font.render("GAME OVER", True, (0, 0, 0))
+            rs_shadow = font.render("Press R to Restart", True, (0, 0, 0))
+
+            screen.blit(go_shadow, (go_rect.x + 3, go_rect.y + 3))
+            screen.blit(rs_shadow, (rs_rect.x + 2, rs_rect.y + 2))
+
+            # Main text
+            screen.blit(game_over_text, go_rect)
+            screen.blit(restart_text, rs_rect)
         
         pygame.display.update()
 
