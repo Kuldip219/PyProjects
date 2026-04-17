@@ -1,5 +1,6 @@
 import pygame
 import random
+global bullets
 
 pygame.init()
 
@@ -78,11 +79,6 @@ enemies = []
 num_enemies = 4
 
 reset_game()  # Initialize the game state
-
-for _ in range(num_enemies):
-    enemy_x = random.randint(0, WIDTH - enemy_width)
-    enemy_y = random.randint(-150, -40)
-    enemies.append([enemy_x, enemy_y])
 
 # Game loop
 running = True
