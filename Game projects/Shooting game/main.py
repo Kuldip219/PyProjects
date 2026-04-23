@@ -54,7 +54,6 @@ def reset_game():
 
 # Score settings
 score = 0
-font = pygame.font.SysFont(None, 36)
 
 # Health settings
 player_health = 5
@@ -175,7 +174,7 @@ while running:
 
         # 🎮 SCORE (with shadow)
         if not game_over:
-            score_main = font.render(f"Score: {score}", True, (255, 255, 0))  # yellow
+            score_main = font.render(f"Score: {score}", True, (255, 255, 0)) 
             score_shadow = font.render(f"Score: {score}", True, (0, 0, 0))
 
             screen.blit(score_shadow, (12, 12))
