@@ -1,6 +1,7 @@
 import pygame
 import random
 global bullets
+game_state = "menu"
 
 pygame.init()
 
@@ -81,6 +82,17 @@ enemies = []
 num_enemies = 4
 
 reset_game()  # Initialize the game state
+
+
+class button:
+    def __init__(self, x, y, width, height, text):
+        self.rect = pygame.Rect(x, y, width, height)
+        self.text = text
+
+    def draw(self, screen, font):
+        mouse_pos = pygame.mouse.get_pos()
+
+        
 
 # Game loop
 running = True
