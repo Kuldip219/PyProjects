@@ -123,6 +123,12 @@ while running:
                 elif exit_rect.collidepoint(mouse_pos):
                     running = False
         
+
+        # options back
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE and game_state == "options":
+                game_state = "menu"
+        
         # Shooting
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
@@ -133,6 +139,32 @@ while running:
             # RESTART GAME
             if event.key == pygame.K_r and game_over:
                 reset_game()
+
+
+    # menu screen
+    if game_state == "menu":
+
+        title_rect = title_img.get_rect(center=(WIDTH//2, 150))
+        screen.blit(title_img, title_rect)
+
+        #play
+        if play_rect.collidepoint(mouse_pos):
+            screen.blit(play_img, (play_rect.x, play_rect.y + 5))
+        else:
+            screen.blit(play_img, play_rect)
+
+        #options
+        if options_rect.collidepoint(mouse_pos):
+            screen.blit(options_img, (options_rect.x, options_rect.y + 5))
+        else:
+            screen.blit(options_img, options_rect)
+        
+        #exit
+        if exit_rect.collidepoint(mouse_pos):
+            screen.blit(exit_img, (exit_rect.x, exit_rect.y + 5))
+        else:
+            screen.blit(exit_img, exit_rect)
+
 
     if not game_over:
         # Player Movement
