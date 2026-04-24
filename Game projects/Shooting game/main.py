@@ -1,8 +1,5 @@
 import pygame
 import random
-global bullets
-game_state = "menu"
-
 pygame.init()
 
 font = pygame.font.Font("Fonts/pixeltype.ttf", 36)
@@ -35,6 +32,16 @@ health_images = [
 
 # Resize health bar
 health_images = [pygame.transform.scale(img, (200, 70)) for img in health_images]
+
+title_img = pygame.image.load("Assets/title.png")
+play_img = pygame.image.load("Assets/play.png")
+options_img = pygame.image.load("Assets/options.png")
+exit_img = pygame.image.load("Assets/exit.png")
+
+title_img = pygame.transform.scale(title_img, (350, 120))
+play_img = pygame.transform.scale(play_img, (250, 80))
+options_img = pygame.transform.scale(options_img, (250, 80))
+exit_img = pygame.transform.scale(exit_img, (250, 80))
 
 # Function to reset the game
 def reset_game():
@@ -92,7 +99,13 @@ class button:
     def draw(self, screen, font):
         mouse_pos = pygame.mouse.get_pos()
 
-        
+        # Hover effect
+        if self.rect.collidepoint(mouse_pos):
+            color = (170, 170, 170) # darker when pressed
+        else:
+            color = (200, 200, 200) # normal color
+
+        pygame.draw.rect(screen, color, self.rect)
 
 # Game loop
 running = True
