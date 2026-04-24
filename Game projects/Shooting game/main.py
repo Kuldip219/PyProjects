@@ -68,14 +68,6 @@ def reset_game():
     player_health = 5
     game_over = False
 
-# Score settings
-score = 0
-
-# Health settings
-player_health = 5
-max_health = 5
-game_over = False
-
 # Player settings
 player_width = 50
 player_height = 50
@@ -96,26 +88,19 @@ enemy_speed = 0.1
 enemies = []
 num_enemies = 4
 
+# Health settings
+player_health = 5
+max_health = 5
+game_over = False
+
+# Score settings
+score = 0
+
 reset_game()  # Initialize the game state
 
 
-class button:
-    def __init__(self, x, y, width, height, text):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.text = text
+# == Game loop == #
 
-    def draw(self, screen, font):
-        mouse_pos = pygame.mouse.get_pos()
-
-        # Hover effect
-        if self.rect.collidepoint(mouse_pos):
-            color = (170, 170, 170) # darker when pressed
-        else:
-            color = (200, 200, 200) # normal color
-
-        pygame.draw.rect(screen, color, self.rect)
-
-# Game loop
 running = True
 while running:
     screen.fill((0, 0, 0))  # Clear screen with black background
@@ -123,6 +108,20 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+        # Menu events
+        if game_state == "menu":
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                
+                if play_rect.collidepoint(mouse_pos):
+                    reset_game()
+                    game_state = "game"
+
+                elif options_rect.collidepoint(mouse_pos):
+                    game_state = "options"
+
+                elif exit_rect.collidepoint(mouse_pos):
+                    running = False
         
         # Shooting
         if event.type == pygame.KEYDOWN:
