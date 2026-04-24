@@ -11,7 +11,7 @@ HEIGHT = 800
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Shooting Game")
 
-# Assets
+# == Assets == #
 player_img = pygame.image.load("Assets/Playership1.png")
 player_img = pygame.transform.scale(player_img, (50, 50))
 
@@ -42,6 +42,14 @@ title_img = pygame.transform.scale(title_img, (350, 120))
 play_img = pygame.transform.scale(play_img, (250, 80))
 options_img = pygame.transform.scale(options_img, (250, 80))
 exit_img = pygame.transform.scale(exit_img, (250, 80))
+
+# Game State
+game_state = "menu"  
+
+# Menu buttons
+play_rect = play_img.get_rect(center=(WIDTH//2, 300))
+options_rect = options_img.get_rect(center=(WIDTH//2, 400))
+exit_rect = exit_img.get_rect(center=(WIDTH//2, 500))
 
 # Function to reset the game
 def reset_game():
