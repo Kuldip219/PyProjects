@@ -51,8 +51,6 @@ play_rect = play_img.get_rect(center=(WIDTH//2, 300))
 options_rect = options_img.get_rect(center=(WIDTH//2, 400))
 exit_rect = exit_img.get_rect(center=(WIDTH//2, 500))
 
-# Function to reset the game
-
 # Player settings
 player_width = 50
 player_height = 50
@@ -75,12 +73,9 @@ num_enemies = 4
 
 # Health settings
 player_health = 5
-# game_over = False
 
 # Score settings
 score = 0
-
-# reset_game()  # Initialize the game state
 
 def reset_game():
     global player_x, bullets, enemies, score, player_health, game_over
@@ -96,7 +91,6 @@ def reset_game():
 
     score = 0
     player_health = 5
-    # game_over = False
 
 # == Game loop == #
 
@@ -133,9 +127,6 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and game_state == "game":
                 bullets.append([player_x + player_width // 2, player_y])
-                # bullet_x = player_x + player_width // 2
-                # bullet_y = player_y
-                # bullets.append([bullet_x, bullet_y])
 
             # RESTART GAME
             if event.key == pygame.K_r and game_state == "game_over":
@@ -180,13 +171,6 @@ while running:
 
         player_x = max(0, min(WIDTH - player_width, player_x))
 
-        # Keep player within screen
-        # if player_x < 0:
-        #     player_x = 0
-        # if player_x > WIDTH - player_width:
-        #     player_x = WIDTH - player_width
-
-
         # Bullets
         for bullet in bullets[:]:
             bullet[1] -= bullet_speed
@@ -212,7 +196,6 @@ while running:
                 if player_health <= 0:
                     player_health = 0
                     game_state = "game_over"
-                    # game_over = True
 
             # Respawn enemy if it goes off screen
             if enemy[1] > HEIGHT:
@@ -221,7 +204,6 @@ while running:
             
         # Move bullets
         for bullet in bullets[:]:
-            # bullet[1] -= bullet_speed
             # Collision check
             for enemy in enemies:
                 if (bullet[0] > enemy[0] and bullet[0] < enemy[0] + enemy_width and
@@ -263,15 +245,7 @@ while running:
         back_rect = back_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 50))
         screen.blit(back_text, back_rect)
 
-        # # 🎮 SCORE (with shadow)
-        # if not game_over:
-        #     score_main = font.render(f"Score: {score}", True, (255, 255, 0)) 
-        #     score_shadow = font.render(f"Score: {score}", True, (0, 0, 0))
-
-        #     screen.blit(score_shadow, (12, 12))
-        #     screen.blit(score_main, (10, 10))
-
-        # # 💀 GAME OVER SCREEN
+    # 💀 GAME OVER SCREEN
     elif game_state == "game_over":    
         game_over_text = big_font.render("GAME OVER", True, (255, 50, 50))
         restart_text = font.render("Press R to Restart", True, (255, 255, 255))
