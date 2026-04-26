@@ -138,8 +138,9 @@ while running:
                 # bullets.append([bullet_x, bullet_y])
 
             # RESTART GAME
-            # if event.key == pygame.K_r and game_over:
-            #     reset_game()
+            if event.key == pygame.K_r and game_state == "game_over":
+                reset_game()
+                game_state = "game"
 
 
     # menu screen
