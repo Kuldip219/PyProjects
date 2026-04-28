@@ -37,11 +37,17 @@ title_img = pygame.image.load("Assets/title.png")
 play_img = pygame.image.load("Assets/play.png")
 options_img = pygame.image.load("Assets/options.png")
 exit_img = pygame.image.load("Assets/exit.png")
+pause_img = pygame.image.load("Assets/menu.png")
+continue_img = pygame.image.load("Assets/continue.png")
+quit_img = pygame.image.load("Assets/quit.png")
 
 title_img = pygame.transform.scale(title_img, (350, 120))
 play_img = pygame.transform.scale(play_img, (250, 80))
 options_img = pygame.transform.scale(options_img, (250, 80))
 exit_img = pygame.transform.scale(exit_img, (250, 80))
+pause_img = pygame.transform.scale(pause_img, (300, 100))
+continue_img = pygame.transform.scale(continue_img, (250, 80))
+quit_img = pygame.transform.scale(quit_img, (250, 80))
 
 # Game State
 game_state = "menu"  
@@ -50,6 +56,9 @@ game_state = "menu"
 play_rect = play_img.get_rect(center=(WIDTH//2, 300))
 options_rect = options_img.get_rect(center=(WIDTH//2, 400))
 exit_rect = exit_img.get_rect(center=(WIDTH//2, 500))
+continue_rect = continue_img.get_rect(center=(WIDTH//2, 350))
+quit_rect = quit_img.get_rect(center=(WIDTH//2, 450))
+pause_img = pause_img.get_rect(center=(WIDTH//2, 200))
 
 # Player settings
 player_width = 50
@@ -111,12 +120,20 @@ while running:
                     reset_game()
                     game_state = "game"
 
+                
+
                 elif options_rect.collidepoint(mouse_pos):
                     game_state = "options"
 
                 elif exit_rect.collidepoint(mouse_pos):
                     running = False
         
+        # Pause menu
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE and game_state == "game":
+                game_state = "pause"
+            elif event.key == pygame.K_ESCAPE and game_state == "pause":
+                game_state = "game"
 
         # options back
         if event.type == pygame.KEYDOWN:
