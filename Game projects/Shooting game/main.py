@@ -58,7 +58,7 @@ options_rect = options_img.get_rect(center=(WIDTH//2, 400))
 exit_rect = exit_img.get_rect(center=(WIDTH//2, 500))
 continue_rect = continue_img.get_rect(center=(WIDTH//2, 350))
 quit_rect = quit_img.get_rect(center=(WIDTH//2, 450))
-pause_img = pause_img.get_rect(center=(WIDTH//2, 200))
+pause_rect = pause_img.get_rect(center=(WIDTH//2, 200))
 
 # Player settings
 player_width = 50
@@ -120,14 +120,22 @@ while running:
                     reset_game()
                     game_state = "game"
 
-                
-
                 elif options_rect.collidepoint(mouse_pos):
                     game_state = "options"
 
                 elif exit_rect.collidepoint(mouse_pos):
                     running = False
         
+        # Pause menu events
+        if game_state == "pause":
+            if event.type == pygame.MOUSEBUTTONDOWN:
+
+                if continue_rect.collidepoint(mouse_pos):
+                    game_state = "game"
+                
+                elif quit_rect.collidepoint(mouse_pos):
+                    running = False
+
         # Pause menu
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE and game_state == "game":
@@ -261,6 +269,19 @@ while running:
         back_text = font.render("Press ESC to go back", True, (200, 200, 200))
         back_rect = back_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 50))
         screen.blit(back_text, back_rect)
+
+    elif game_state == "pause":
+        # Dark overlay effect
+        overlay = pygame.Surface((WIDTH, HEIGHT))
+        overlay.set_alpha(180)  # Set transparency
+        overlay.fill((0, 0, 0))  # Black color
+        screen.blit(overlay, (0, 0))
+
+        # Title
+        screen.blit(pause_img, pause_rect)
+
+        # Continue button
+        
 
     # 💀 GAME OVER SCREEN
     elif game_state == "game_over":    
