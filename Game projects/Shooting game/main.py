@@ -45,9 +45,9 @@ title_img = pygame.transform.scale(title_img, (350, 120))
 play_img = pygame.transform.scale(play_img, (250, 80))
 options_img = pygame.transform.scale(options_img, (250, 80))
 exit_img = pygame.transform.scale(exit_img, (250, 80))
-pause_img = pygame.transform.scale(pause_img, (300, 100))
+pause_img = pygame.transform.scale(pause_img, (400, 100))
 continue_img = pygame.transform.scale(continue_img, (250, 80))
-quit_img = pygame.transform.scale(quit_img, (250, 80))
+quit_img = pygame.transform.scale(quit_img, (250, 72))
 
 # Game State
 game_state = "menu"  
@@ -134,7 +134,7 @@ while running:
                     game_state = "game"
                 
                 elif quit_rect.collidepoint(mouse_pos):
-                    running = False
+                    game_state = "menu"
 
         # Pause menu
         if event.type == pygame.KEYDOWN:
@@ -281,7 +281,16 @@ while running:
         screen.blit(pause_img, pause_rect)
 
         # Continue button
-        
+        if continue_rect.collidepoint(mouse_pos):
+            screen.blit(continue_img, (continue_rect.x, continue_rect.y + 5))
+        else:
+            screen.blit(continue_img, continue_rect)
+
+        # Quit button
+        if quit_rect.collidepoint(mouse_pos):
+            screen.blit(quit_img, (quit_rect.x, quit_rect.y + 5))
+        else:
+            screen.blit(quit_img, quit_rect)
 
     # 💀 GAME OVER SCREEN
     elif game_state == "game_over":    
