@@ -9,7 +9,7 @@ big_font = pygame.font.Font("Fonts/pixeltype.ttf", 72)
 WIDTH = 480
 HEIGHT = 800
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Shooting Game")
+pygame.display.set_caption("X Hunter")
 
 # == Assets == #
 player_img = pygame.image.load("Assets/Playership1.png")
