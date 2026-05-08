@@ -30,6 +30,13 @@ health_images = [
     pygame.image.load("Assets/Health_5.png")
 ]
 
+explosion_frames = []
+
+for i in range(1, 9):
+    img = pygame.image.load(f"Assets/explosion_{i}.png")
+    img = pygame.transform.scale(img, (70, 70))
+    explosion_frames.append(img)
+
 # Resize health bar
 health_images = [pygame.transform.scale(img, (200, 70)) for img in health_images]
 
@@ -70,6 +77,9 @@ player_speed = 0.5
 # Bullet settings
 bullets = []
 bullet_speed = 1
+
+# Explosion settings
+explosions = []
 
 # Enemy settings
 enemy_width = 40
@@ -274,7 +284,7 @@ while running:
         # Dark overlay effect
         overlay = pygame.Surface((WIDTH, HEIGHT))
         overlay.set_alpha(180)  # Set transparency
-        overlay.fill((0, 0, 0))  # Black color
+        overlay.fill((30, 30, 30))  # Black color
         screen.blit(overlay, (0, 0))
 
         # Title
