@@ -248,7 +248,8 @@ while running:
                     explosions.append({
                         "x": enemy[0],
                         "y": enemy[1],
-                        "frame": 0
+                        "frame": 0,
+                        "timer": 0
                     })
 
                     if bullet in bullets:
@@ -266,6 +267,28 @@ while running:
         # Draw enemy
         for enemy in enemies:
             screen.blit(enemy_img, (enemy[0], enemy[1]))
+
+        # Draw explosion animations
+        for explosion in explosions[:]:
+
+            frame = explosion["frame"]
+
+            if frame < len(explosion_frames):
+
+                screen.blit(
+                    explosion_frames[frame],
+                    (explosion["x"], explosion["y"])
+                )
+
+                explosion["timer"] += 1
+
+                # speed control
+                if explosion["timer"] >= 60:
+                    explosion['frame'] += 1
+                    explosion["timer"] = 0
+
+            else:
+                explosions.remove(explosion)
 
         # Draw bullets
         for bullet in bullets:
