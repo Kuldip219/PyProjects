@@ -244,6 +244,13 @@ while running:
                 if (bullet[0] > enemy[0] and bullet[0] < enemy[0] + enemy_width and
                     bullet[1] > enemy[1] and bullet[1] < enemy[1] + enemy_height):
 
+                    # Create explosion
+                    explosions.append({
+                        "x": enemy[0],
+                        "y": enemy[1],
+                        "frame": 0
+                    })
+
                     if bullet in bullets:
                         bullets.remove(bullet)
 
