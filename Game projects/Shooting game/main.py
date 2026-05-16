@@ -93,6 +93,13 @@ num_enemies = 4
 # Health settings
 player_health = 5
 
+# Screen shake
+shake_timer = 0
+shake_strength = 8
+
+# Damage flash
+damage_flash = 0
+
 # Score settings
 score = 0
 
