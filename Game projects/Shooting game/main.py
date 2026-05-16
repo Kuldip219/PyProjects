@@ -238,8 +238,8 @@ while running:
 
                 player_health -= 1
 
-                shake_timer = 10
-                damage_flash = 10
+                shake_timer = 100
+                damage_flash = 80
 
                 # Reset enemy after hit
                 enemy[1] = random.randint(-200, 0)
@@ -287,17 +287,17 @@ while running:
                     score += 1
                     break
         
-
         shake_x = 0
         shake_y = 0
-
+    
         if shake_timer > 0:
             shake_x = random.randint(-shake_strength, shake_strength)
             shake_y = random.randint(-shake_strength, shake_strength)
             shake_timer -= 1
 
         # Draw player
-        screen.blit(player_img, (player_x + shake_x, player_y + shake_y))
+        if not player_dead:
+            screen.blit(player_img, (player_x + shake_x, player_y + shake_y))
 
         # Draw enemy
         for enemy in enemies:
@@ -364,6 +364,8 @@ while running:
             else:
                 player_dead = False
                 game_state = "game_over"
+                player_explosion = None
+
 
         # Score
         score_text = font.render(f"Score: {score}", True, (255, 255, 0))
