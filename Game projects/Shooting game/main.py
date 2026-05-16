@@ -209,11 +209,14 @@ while running:
     elif game_state == "game":
 
         # Player Movement
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            player_x -= player_speed
-        if keys[pygame.K_RIGHT]:
-            player_x += player_speed
+        if not player_dead:
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_LEFT]:
+                player_x -= player_speed
+
+            if keys[pygame.K_RIGHT]:
+                player_x += player_speed
 
         player_x = max(0, min(WIDTH - player_width, player_x))
 
@@ -354,7 +357,7 @@ while running:
 
                 player_explosion["timer"] += 1
 
-                if player_explosion["timer"] >= 4:
+                if player_explosion["timer"] >= 60:
                     player_explosion["frame"] += 1
                     player_explosion["timer"] = 0
 
