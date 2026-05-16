@@ -100,6 +100,10 @@ shake_strength = 8
 # Damage flash
 damage_flash = 0
 
+# Player explosion
+player_dead = False
+player_explosion = None
+
 # Score settings
 score = 0
 
@@ -230,6 +234,9 @@ while running:
                 enemy[1] + enemy_height > player_y):
 
                 player_health -= 1
+
+                shake_timer = 10
+                damage_flash = 10
 
                 # Reset enemy after hit
                 enemy[1] = random.randint(-200, 0)
