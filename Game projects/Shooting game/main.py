@@ -285,13 +285,13 @@ while running:
                     break
         
 
-    shake_x = 0
-    shake_y = 0
+        shake_x = 0
+        shake_y = 0
 
-    if shake_timer > 0:
-        shake_x = random.randint(-shake_strength, shake_strength)
-        shake_y = random.randint(-shake_strength, shake_strength)
-        shake_timer -= 1
+        if shake_timer > 0:
+            shake_x = random.randint(-shake_strength, shake_strength)
+            shake_y = random.randint(-shake_strength, shake_strength)
+            shake_timer -= 1
 
         # Draw player
         screen.blit(player_img, (player_x + shake_x, player_y + shake_y))
@@ -306,6 +306,17 @@ while running:
 
         # Draw health bar
         screen.blit(health_images[player_health], (10, 50))
+
+        # Damage flash
+        if damage_flash > 0:
+
+            flash = pygame.Surface((WIDTH, HEIGHT))
+            flash.set_alpha(80)
+            flash.fill((255, 0, 0))
+
+            screen.blit(flash, (0, 0))
+
+            damage_flash -= 1
 
         # Draw explosion animations
         for explosion in explosions[:]:
@@ -329,7 +340,27 @@ while running:
             else:
                 explosions.remove(explosion)
 
-        
+        # Player explosion
+        if player_dead and player_explosion:
+
+            frame = player_explosion["frame"]
+
+            if frame < len(explosion_frames):
+
+                screen.blit(
+                    explosion_frames[frame],
+                    (player_explosion["x"], player_explosion["y"])
+                )
+
+                player_explosion["timer"] += 1
+
+                if player_explosion["timer"] >= 4:
+                    player_explosion["frame"] += 1
+                    player_explosion["timer"] = 0
+
+            else:
+                player_dead = False
+                game_state = "game_over"
 
         # Score
         score_text = font.render(f"Score: {score}", True, (255, 255, 0))
