@@ -244,7 +244,16 @@ while running:
 
                 if player_health <= 0:
                     player_health = 0
-                    game_state = "game_over"
+
+                    # Create player explosion
+                    player_explosion = {
+                        "x": player_x, - 10,
+                        "y": player_y - 10,
+                        "frame": 0,
+                        "timer": 0
+                    }
+
+                    player_dead = True
 
             # Respawn enemy if it goes off screen
             if enemy[1] > HEIGHT:
