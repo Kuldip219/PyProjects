@@ -238,8 +238,8 @@ while running:
 
                 player_health -= 1
 
-                shake_timer = 100
-                damage_flash = 80
+                shake_timer = 130
+                damage_flash = 100
 
                 # Reset enemy after hit
                 enemy[1] = random.randint(-200, 0)
