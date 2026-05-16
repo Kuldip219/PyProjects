@@ -247,7 +247,7 @@ while running:
 
                     # Create player explosion
                     player_explosion = {
-                        "x": player_x, - 10,
+                        "x": player_x - 10,
                         "y": player_y - 10,
                         "frame": 0,
                         "timer": 0
@@ -283,13 +283,22 @@ while running:
 
                     score += 1
                     break
+        
+
+    shake_x = 0
+    shake_y = 0
+
+    if shake_timer > 0:
+        shake_x = random.randint(-shake_strength, shake_strength)
+        shake_y = random.randint(-shake_strength, shake_strength)
+        shake_timer -= 1
 
         # Draw player
-        screen.blit(player_img, (player_x, player_y))
+        screen.blit(player_img, (player_x + shake_x, player_y + shake_y))
 
         # Draw enemy
         for enemy in enemies:
-            screen.blit(enemy_img, (enemy[0], enemy[1]))
+            screen.blit(enemy_img, (enemy[0] + shake_x, enemy[1] + shake_y))
 
         # Draw explosion animations
         for explosion in explosions[:]:
@@ -300,7 +309,7 @@ while running:
 
                 screen.blit(
                     explosion_frames[frame],
-                    (explosion["x"], explosion["y"])
+                    (explosion["x"] + shake_x, explosion["y"] + shake_y)
                 )
 
                 explosion["timer"] += 1
@@ -315,7 +324,7 @@ while running:
 
         # Draw bullets
         for bullet in bullets:
-            screen.blit(bullet_img, (bullet[0], bullet[1]))
+            screen.blit(bullet_img, (bullet[0] + shake_x, bullet[1] + shake_y))
 
         # Draw health bar
         screen.blit(health_images[player_health], (10, 50))
