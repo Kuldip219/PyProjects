@@ -300,6 +300,13 @@ while running:
         for enemy in enemies:
             screen.blit(enemy_img, (enemy[0] + shake_x, enemy[1] + shake_y))
 
+        # Draw bullets
+        for bullet in bullets:
+            screen.blit(bullet_img, (bullet[0] + shake_x, bullet[1] + shake_y))
+
+        # Draw health bar
+        screen.blit(health_images[player_health], (10, 50))
+
         # Draw explosion animations
         for explosion in explosions[:]:
 
@@ -322,12 +329,7 @@ while running:
             else:
                 explosions.remove(explosion)
 
-        # Draw bullets
-        for bullet in bullets:
-            screen.blit(bullet_img, (bullet[0] + shake_x, bullet[1] + shake_y))
-
-        # Draw health bar
-        screen.blit(health_images[player_health], (10, 50))
+        
 
         # Score
         score_text = font.render(f"Score: {score}", True, (255, 255, 0))
