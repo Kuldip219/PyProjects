@@ -84,7 +84,7 @@ explosions = []
 # Enemy settings
 enemy_width = 40
 enemy_height = 40
-enemy_speed = 0.1
+enemy_speed = 0.2
 
 # Create multiple enemies
 enemies = []
@@ -178,6 +178,10 @@ while running:
             if event.key == pygame.K_r and game_state == "game_over":
                 reset_game()
                 game_state = "game"
+
+            # QUIT GAME
+            if event.key == pygame.K_q and game_state == "game_over":
+                game_state = "menu"
 
 
     # menu screen
@@ -406,11 +410,13 @@ while running:
     elif game_state == "game_over":    
         game_over_text = big_font.render("GAME OVER", True, (255, 50, 50))
         restart_text = font.render("Press R to Restart", True, (255, 255, 255))
+        quit_run_text = font.render("Press Q to Quit", True, (255, 255, 255))
 
         # Center text
         go_rect = game_over_text.get_rect(center=(WIDTH//2, HEIGHT//2 - 40))
         rs_rect = restart_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 30))
-
+        qr_rect = quit_run_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 80))
+        
         # Shadows
         go_shadow = big_font.render("GAME OVER", True, (0, 0, 0))
         rs_shadow = font.render("Press R to Restart", True, (0, 0, 0))
@@ -421,6 +427,7 @@ while running:
         # Main text
         screen.blit(game_over_text, go_rect)
         screen.blit(restart_text, rs_rect)
+        screen.blit(quit_run_text, qr_rect)
         
     pygame.display.update()    
 
