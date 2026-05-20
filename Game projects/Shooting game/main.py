@@ -238,8 +238,8 @@ while running:
 
                 player_health -= 1
 
-                shake_timer = 130
-                damage_flash = 100
+                shake_timer = 150
+                damage_flash = 130
 
                 # Reset enemy after hit
                 enemy[1] = random.randint(-200, 0)
@@ -357,7 +357,7 @@ while running:
 
                 player_explosion["timer"] += 1
 
-                if player_explosion["timer"] >= 60:
+                if player_explosion["timer"] >= 80:
                     player_explosion["frame"] += 1
                     player_explosion["timer"] = 0
 
