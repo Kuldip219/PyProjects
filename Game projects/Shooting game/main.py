@@ -157,10 +157,10 @@ while running:
                 
                 if play_rect.collidepoint(mouse_pos):
                     reset_game()
-                    game_state = "game"
+                    start_fade("game")
 
                 elif options_rect.collidepoint(mouse_pos):
-                    game_state = "options"
+                    start_fade("options")
 
                 elif exit_rect.collidepoint(mouse_pos):
                     running = False
@@ -170,22 +170,22 @@ while running:
             if event.type == pygame.MOUSEBUTTONDOWN:
 
                 if continue_rect.collidepoint(mouse_pos):
-                    game_state = "game"
+                    start_fade("game")
                 
                 elif quit_rect.collidepoint(mouse_pos):
-                    game_state = "menu"
+                    start_fade("menu")
 
         # Pause menu
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE and game_state == "game":
-                game_state = "pause"
+                start_fade("pause")
             elif event.key == pygame.K_ESCAPE and game_state == "pause":
-                game_state = "game"
+                start_fade("game")
 
         # options back
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE and game_state == "options":
-                game_state = "menu"
+                start_fade("menu")
         
         # Shooting
         if event.type == pygame.KEYDOWN:
@@ -195,11 +195,11 @@ while running:
             # RESTART GAME
             if event.key == pygame.K_r and game_state == "game_over":
                 reset_game()
-                game_state = "game"
+                start_fade("game")
 
             # QUIT GAME
             if event.key == pygame.K_q and game_state == "game_over":
-                game_state = "menu"
+                start_fade("menu")
 
 
     # menu screen
@@ -385,7 +385,7 @@ while running:
 
             else:
                 player_dead = False
-                game_state = "game_over"
+                start_fade("game_over")
                 player_explosion = None
 
 
