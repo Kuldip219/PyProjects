@@ -447,6 +447,34 @@ while running:
         screen.blit(restart_text, rs_rect)
         screen.blit(quit_run_text, qr_rect)
         
+
+        # Fade animation system
+
+        if fading_in:
+
+            fade_alpha -= fade_speed
+
+            if fade_alpha <= 0:
+                fade_alpha = 0
+                fading_in = False
+
+        # Fade out
+        if fading_out:
+
+            fade_alpha += fade_speed
+
+            if fade_alpha >= 255:
+
+                fade_alpha = 255
+                fading_out = False
+
+                # Change game screen
+                game_state = next_state
+
+                # Start fade in
+                fading_in = True
+
+
     pygame.display.update()    
 
 
