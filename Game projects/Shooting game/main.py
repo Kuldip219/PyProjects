@@ -86,6 +86,13 @@ enemy_width = 40
 enemy_height = 40
 enemy_speed = 0.2
 
+# Fade animation
+fade_alpha = 255
+fade_speed = 5
+fading_in = True
+fading_out = False
+next_state = None
+
 # Create multiple enemies
 enemies = []
 num_enemies = 4
