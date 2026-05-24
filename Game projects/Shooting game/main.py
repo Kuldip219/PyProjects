@@ -11,6 +11,9 @@ HEIGHT = 800
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("X Hunter")
 
+fade_surface = pygame.Surface((WIDTH, HEIGHT))
+fade_surface.fill((0, 0, 0))
+
 # == Assets == #
 player_img = pygame.image.load("Assets/Playership1.png")
 player_img = pygame.transform.scale(player_img, (50, 50))
@@ -86,13 +89,6 @@ enemy_width = 40
 enemy_height = 40
 enemy_speed = 0.2
 
-# Fade animation
-fade_alpha = 255
-fade_speed = 5
-fading_in = True
-fading_out = False
-next_state = None
-
 # Create multiple enemies
 enemies = []
 num_enemies = 4
@@ -113,6 +109,21 @@ player_explosion = None
 
 # Score settings
 score = 0
+
+# Fade animation
+fade_alpha = 255
+fade_speed = 5
+fading_in = True
+fading_out = False
+next_state = None
+
+
+def start_fade(target_state):
+    global fading_out, next_state
+
+    fading_out = True
+    next_state = target_state
+
 
 def reset_game():
     global player_x, bullets, enemies, score, player_health, game_over
