@@ -112,17 +112,21 @@ score = 0
 
 # Fade animation
 fade_alpha = 255
-fade_speed = 5
+fade_speed = 2
 fading_in = True
 fading_out = False
 next_state = None
 
 
 def start_fade(target_state):
-    global fading_out, next_state
+    global fading_out, fading_in, next_state, fade_alpha
 
     fading_out = True
+    fading_in = False
+
     next_state = target_state
+    
+    fade_alpha = 0
 
 
 def reset_game():
@@ -446,33 +450,38 @@ while running:
         screen.blit(game_over_text, go_rect)
         screen.blit(restart_text, rs_rect)
         screen.blit(quit_run_text, qr_rect)
-        
 
-        # Fade animation system
 
-        if fading_in:
+    # Fade animation system
 
-            fade_alpha -= fade_speed
+    if fading_in:
 
-            if fade_alpha <= 0:
-                fade_alpha = 0
-                fading_in = False
+        fade_alpha -= fade_speed
 
-        # Fade out
-        if fading_out:
+        if fade_alpha <= 0:
+            fade_alpha = 0
+            fading_in = False
 
-            fade_alpha += fade_speed
+    # Fade out
+    if fading_out:
 
-            if fade_alpha >= 255:
+        fade_alpha += fade_speed
 
-                fade_alpha = 255
-                fading_out = False
+        if fade_alpha >= 255:
 
-                # Change game screen
-                game_state = next_state
+            fade_alpha = 255
 
-                # Start fade in
-                fading_in = True
+            fading_out = False
+
+            # Change game screen
+            game_state = next_state
+
+            # Start fade in
+            fading_in = True
+
+    # Draw fade layer
+    fade_surface.set_alpha(fade_alpha)
+    screen.blit(fade_surface, (0, 0)) 
 
 
     pygame.display.update()    
