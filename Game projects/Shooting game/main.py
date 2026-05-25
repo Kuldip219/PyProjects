@@ -6,7 +6,7 @@ font = pygame.font.Font("Fonts/pixeltype.ttf", 36)
 big_font = pygame.font.Font("Fonts/pixeltype.ttf", 72)
 
 # Screen settings
-WIDTH = 480
+WIDTH = 600
 HEIGHT = 800
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("X Hunter")
@@ -87,7 +87,7 @@ explosions = []
 # Enemy settings
 enemy_width = 40
 enemy_height = 40
-enemy_speed = 0.2
+enemy_speed = 0.3
 
 # Create multiple enemies
 enemies = []
