@@ -14,6 +14,9 @@ pygame.display.set_caption("X Hunter")
 fade_surface = pygame.Surface((WIDTH, HEIGHT))
 fade_surface.fill((0, 0, 0))
 
+# FPS control
+clock = pygame.time.Clock()
+
 # == Assets == #
 player_img = pygame.image.load("Assets/Playership1.png")
 player_img = pygame.transform.scale(player_img, (50, 50))
@@ -75,11 +78,11 @@ player_width = 50
 player_height = 50
 player_x = WIDTH // 2
 player_y = HEIGHT - 80
-player_speed = 0.5
+player_speed = 5
 
 # Bullet settings
 bullets = []
-bullet_speed = 1
+bullet_speed = 10
 
 # Explosion settings
 explosions = []
@@ -87,7 +90,7 @@ explosions = []
 # Enemy settings
 enemy_width = 40
 enemy_height = 40
-enemy_speed = 0.3
+enemy_speed = 5
 
 # Create multiple enemies
 enemies = []
@@ -112,7 +115,7 @@ score = 0
 
 # Fade animation
 fade_alpha = 255
-fade_speed = 2
+fade_speed = 15
 fading_in = True
 fading_out = False
 next_state = None
@@ -150,6 +153,7 @@ running = True
 while running:
     screen.fill((0, 0, 0))  # Clear screen with black background
     mouse_pos = pygame.mouse.get_pos()
+
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -257,15 +261,16 @@ while running:
             enemy[1] += enemy_speed
 
             # Collision with player
-            if (enemy[0] < player_x + player_width and
+            if not player_dead and (
+                enemy[0] < player_x + player_width and
                 enemy[0] + enemy_width > player_x and
                 enemy[1] < player_y + player_height and
                 enemy[1] + enemy_height > player_y):
 
                 player_health -= 1
 
-                shake_timer = 150
-                damage_flash = 130
+                shake_timer = 40
+                damage_flash = 25
 
                 # Reset enemy after hit
                 enemy[1] = random.randint(-200, 0)
@@ -281,6 +286,9 @@ while running:
                         "frame": 0,
                         "timer": 0
                     }
+
+                    player_x = -1000
+                    player_y = -1000
 
                     player_dead = True
 
@@ -362,7 +370,7 @@ while running:
                 explosion["timer"] += 1
 
                 # speed control
-                if explosion["timer"] >= 60:
+                if explosion["timer"] >= 3:
                     explosion['frame'] += 1
                     explosion["timer"] = 0
 
@@ -383,7 +391,7 @@ while running:
 
                 player_explosion["timer"] += 1
 
-                if player_explosion["timer"] >= 80:
+                if player_explosion["timer"] >= 5:
                     player_explosion["frame"] += 1
                     player_explosion["timer"] = 0
 
@@ -485,6 +493,7 @@ while running:
 
 
     pygame.display.update()    
+    clock.tick(60)
 
 
 pygame.quit()
