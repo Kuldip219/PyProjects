@@ -7,15 +7,19 @@
 
     
     Label:
-        id: song_name
-        text: 'No song playing'
+        id: "My Music"
         font_size: 24
+        size_hint_y: None
+        height: 50
 
-    Button:
-        text: 'Play'
+    ScrollView:
 
-    Button:
-        text: 'Pause'
-    
-    Button:
-        text: 'Stop'
+        GridLayout:
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+
+            spacing: 5
+
+            Button:
+                text: "Temporary Button"

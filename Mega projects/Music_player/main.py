@@ -11,7 +11,7 @@ Builder.load_file('music_player.kv')
 
 
 class MusicPlayer(BoxLayout):
-    songs = ListProperty([])
+    songs = []
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
