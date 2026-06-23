@@ -22,4 +22,19 @@
             spacing: 5
 
             Button:
-                text: "Temporary Button"
+                text: "Play"
+                size_hint_y: None
+                height: 40
+                on_release: root.play_music()
+
+            Button:
+                text: "Pause"
+                size_hint_y: None
+                height: 40
+                on_release: root.pause_music()
+
+            Button:
+                text: "Stop"
+                size_hint_y: None
+                height: 40
+                on_release: root.stop_music()
