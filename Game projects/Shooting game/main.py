@@ -17,7 +17,9 @@ fade_surface.fill((0, 0, 0))
 # FPS control
 clock = pygame.time.Clock()
 
-# == Assets == #
+## == Assets == ##
+
+# Player, Enemy, Bullet assets and sizes
 player_img = pygame.image.load("Assets/Playership1.png")
 player_img = pygame.transform.scale(player_img, (50, 50))
 
@@ -27,6 +29,7 @@ enemy_img = pygame.transform.scale(enemy_img, (50, 50))
 bullet_img = pygame.image.load("Assets/Bullet1.png")
 bullet_img = pygame.transform.scale(bullet_img, (10, 20))
 
+# Health bar assets
 health_images = [
     pygame.image.load("Assets/Health_0.png"),
     pygame.image.load("Assets/Health_1.png"),
@@ -46,6 +49,7 @@ for i in range(1, 9):
 # Resize health bar
 health_images = [pygame.transform.scale(img, (200, 70)) for img in health_images]
 
+# Menu assets
 title_img = pygame.image.load("Assets/title.png")
 play_img = pygame.image.load("Assets/play.png")
 options_img = pygame.image.load("Assets/options.png")
@@ -54,6 +58,7 @@ pause_img = pygame.image.load("Assets/menu.png")
 continue_img = pygame.image.load("Assets/continue.png")
 quit_img = pygame.image.load("Assets/quit.png")
 
+# Resize Menu assets
 title_img = pygame.transform.scale(title_img, (350, 120))
 play_img = pygame.transform.scale(play_img, (250, 80))
 options_img = pygame.transform.scale(options_img, (250, 80))
@@ -121,6 +126,9 @@ fading_out = False
 next_state = None
 
 
+## == Functions == ##
+
+# Start fade function
 def start_fade(target_state):
     global fading_out, fading_in, next_state, fade_alpha
 
@@ -131,7 +139,7 @@ def start_fade(target_state):
     
     fade_alpha = 0
 
-
+# Reset game function
 def reset_game():
     global player_x, bullets, enemies, score, player_health, game_over
 
@@ -147,7 +155,7 @@ def reset_game():
     score = 0
     player_health = 5
 
-# == Game loop == #
+## == Game loop == ##
 
 running = True
 while running:
