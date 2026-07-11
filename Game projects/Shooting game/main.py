@@ -455,25 +455,28 @@ while running:
     # 💀 GAME OVER SCREEN
     elif game_state == "game_over":    
         game_over_text = big_font.render("GAME OVER", True, (255, 50, 50))
-        restart_text = font.render("Press R to Restart", True, (255, 255, 255))
-        quit_run_text = font.render("Press Q to Quit", True, (255, 255, 255))
+        go_rect = game_over_text.get_rect(center=(WIDTH//2, 200))
 
-        # Center text
-        go_rect = game_over_text.get_rect(center=(WIDTH//2, HEIGHT//2 - 40))
-        rs_rect = restart_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 30))
-        qr_rect = quit_run_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 80))
-        
-        # Shadows
         go_shadow = big_font.render("GAME OVER", True, (0, 0, 0))
-        rs_shadow = font.render("Press R to Restart", True, (0, 0, 0))
 
-        screen.blit(go_shadow, (go_rect.x + 3, go_rect.y + 3))
-        screen.blit(rs_shadow, (rs_rect.x + 2, rs_rect.y + 2))
-
+        # Draw shadow for "GAME OVER" text
+        screen.blit(go_shadow, (go_rect.x + 5, go_rect.y + 5))
+        screen.blit(game_over_text, go_rect)
+        
         # Main text
         screen.blit(game_over_text, go_rect)
-        screen.blit(restart_text, rs_rect)
-        screen.blit(quit_run_text, qr_rect)
+
+        # Restart button
+        if restart_rect.collidepoint(mouse_pos):
+            screen.blit(restart_img, (restart_rect.x, restart_rect.y + 5))
+        else:
+            screen.blit(restart_img, restart_rect)
+
+        # Quit button
+        if quit_gameover_rect.collidepoint(mouse_pos):
+            screen.blit(quit_gameover_img, (quit_gameover_rect.x, quit_gameover_rect.y + 5))
+        else:
+            screen.blit(quit_gameover_img, quit_gameover_rect)
 
 
     # Fade animation system
