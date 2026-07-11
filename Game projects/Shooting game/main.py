@@ -147,7 +147,11 @@ def start_fade(target_state):
 
 # Reset game function
 def reset_game():
-    global player_x, bullets, enemies, score, player_health, game_over
+    global player_x, player_y
+    global bullets, enemies
+    global score, player_health
+    global player_dead, player_explosion
+    global explosions, shake_timer, damage_flash
 
     player_x = WIDTH // 2
     bullets = []
@@ -160,6 +164,17 @@ def reset_game():
 
     score = 0
     player_health = 5
+
+    shake_timer = 0
+    damage_flash = 0
+
+    player_x = WIDTH // 2
+    player_y = HEIGHT - 80
+
+    player_dead = False
+    player_explosion = None
+
+    explosions.clear()
 
 ## == Game loop == ##
 
