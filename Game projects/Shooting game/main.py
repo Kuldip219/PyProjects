@@ -57,6 +57,8 @@ exit_img = pygame.image.load("Assets/exit.png")
 pause_img = pygame.image.load("Assets/menu.png")
 continue_img = pygame.image.load("Assets/continue.png")
 quit_img = pygame.image.load("Assets/quit.png")
+restart_img = pygame.image.load("Assets/restart.png")
+quit_gameover_img = pygame.image.load("Assets/quitt.png")
 
 # Resize Menu assets
 title_img = pygame.transform.scale(title_img, (350, 120))
@@ -66,6 +68,8 @@ exit_img = pygame.transform.scale(exit_img, (250, 80))
 pause_img = pygame.transform.scale(pause_img, (400, 100))
 continue_img = pygame.transform.scale(continue_img, (250, 80))
 quit_img = pygame.transform.scale(quit_img, (250, 72))
+restart_img = pygame.transform.scale(restart_img, (250, 80))
+quit_gameover_img = pygame.transform.scale(quit_gameover_img, (250, 80))
 
 # Game State
 game_state = "menu"  
@@ -77,6 +81,8 @@ exit_rect = exit_img.get_rect(center=(WIDTH//2, 500))
 continue_rect = continue_img.get_rect(center=(WIDTH//2, 350))
 quit_rect = quit_img.get_rect(center=(WIDTH//2, 450))
 pause_rect = pause_img.get_rect(center=(WIDTH//2, 200))
+restart_rect = restart_img.get_rect(center=(WIDTH//2, 350))
+quit_gameover_rect = quit_gameover_img.get_rect(center=(WIDTH//2, 450))
 
 # Player settings
 player_width = 50
@@ -191,6 +197,17 @@ while running:
                 elif quit_rect.collidepoint(mouse_pos):
                     start_fade("menu")
 
+        # Game over events
+        if game_state == "game_over":
+            if event.type == pygame.MOUSEBUTTONDOWN:
+
+                if restart_rect.collidepoint(mouse_pos):
+                    reset_game()
+                    start_fade("game")
+                
+                elif quit_gameover_rect.collidepoint(mouse_pos):
+                    start_fade("menu")
+
         # Pause menu
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE and game_state == "game":
@@ -207,15 +224,6 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and game_state == "game":
                 bullets.append([player_x + player_width // 2, player_y])
-
-            # RESTART GAME
-            if event.key == pygame.K_r and game_state == "game_over":
-                reset_game()
-                start_fade("game")
-
-            # QUIT GAME
-            if event.key == pygame.K_q and game_state == "game_over":
-                start_fade("menu")
 
 
     # menu screen
