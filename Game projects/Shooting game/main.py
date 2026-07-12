@@ -1,6 +1,7 @@
 import pygame
 import random
 pygame.init()
+pygame.font.init()
 
 font = pygame.font.Font("Fonts/pixeltype.ttf", 36)
 big_font = pygame.font.Font("Fonts/pixeltype.ttf", 72)
@@ -31,12 +32,12 @@ bullet_img = pygame.transform.scale(bullet_img, (10, 20))
 
 # Health bar assets
 health_images = [
-    pygame.image.load("Assets/Health_0.png"),
-    pygame.image.load("Assets/Health_1.png"),
-    pygame.image.load("Assets/Health_2.png"),
-    pygame.image.load("Assets/Health_3.png"),
-    pygame.image.load("Assets/Health_4.png"),
-    pygame.image.load("Assets/Health_5.png")
+    pygame.image.load("Assets/health_0.png"),
+    pygame.image.load("Assets/health_1.png"),
+    pygame.image.load("Assets/health_2.png"),
+    pygame.image.load("Assets/health_3.png"),
+    pygame.image.load("Assets/health_4.png"),
+    pygame.image.load("Assets/health_5.png")
 ]
 
 explosion_frames = []
@@ -178,7 +179,9 @@ def reset_game():
 
 ## == Game loop == ##
 
+
 running = True
+
 while running:
     screen.fill((0, 0, 0))  # Clear screen with black background
     mouse_pos = pygame.mouse.get_pos()
@@ -528,6 +531,5 @@ while running:
 
     pygame.display.update()    
     clock.tick(60)
-
 
 pygame.quit()
