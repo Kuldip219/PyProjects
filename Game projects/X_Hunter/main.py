@@ -1,9 +1,6 @@
-import pygame
+"""Entry point: starts the game."""
+
 from game import Game
 
-pygame.init()
-
-game = Game()
-game.run()
-
-pygame.quit()
+if __name__ == "__main__":
+    Game().run()
