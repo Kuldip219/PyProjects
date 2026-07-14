@@ -1,5 +1,7 @@
 # 🚀 X Hunter
 
+🚀 A 2D arcade-style space shooter built with Python and Pygame featuring smooth gameplay, explosion effects, animated menus, health system, scoring, and polished UI.
+
 ---
 
 ## 📥 Download
@@ -10,9 +12,7 @@ The latest playable version is available in the **Releases** section.
 2. Extract the ZIP file
 3. Run **X_Hunter.exe**
 
-Note: There are two Source code files, you don't have to download those.
-
-No Python installation is required.
+Note: There are two Source code files, you don't have to download those. No Python installation is required.
 
 ---
 
