@@ -7,11 +7,9 @@ is called - exactly matching the original script's order of operations.
 """
 
 from __future__ import annotations
-
 from dataclasses import dataclass, field
-
+from resource_path import resource_path
 import pygame
-
 import settings
 
 
@@ -41,21 +39,27 @@ class Assets:
     def load(cls) -> "Assets":
         """Load, scale, and return every game asset in one call."""
 
-        font = pygame.font.Font(settings.FONT_PATH, settings.FONT_SIZE_SMALL)
-        big_font = pygame.font.Font(settings.FONT_PATH, settings.FONT_SIZE_LARGE)
+        font = pygame.font.Font(
+            resource_path(settings.FONT_PATH), 
+            settings.FONT_SIZE_SMALL
+        )
+        big_font = pygame.font.Font(
+            resource_path(settings.FONT_PATH),
+            settings.FONT_SIZE_LARGE
+        )
 
         player_img = pygame.transform.scale(
-            pygame.image.load("Assets/Playership1.png"), settings.PLAYER_IMG_SIZE
+            pygame.image.load(resource_path("Assets/Playership1.png")), settings.PLAYER_IMG_SIZE
         )
         enemy_img = pygame.transform.scale(
-            pygame.image.load("Assets/Enemyship.png"), settings.ENEMY_IMG_SIZE
+            pygame.image.load(resource_path("Assets/Enemyship.png")), settings.ENEMY_IMG_SIZE
         )
         bullet_img = pygame.transform.scale(
-            pygame.image.load("Assets/Bullet1.png"), settings.BULLET_IMG_SIZE
+            pygame.image.load(resource_path("Assets/Bullet1.png")), settings.BULLET_IMG_SIZE
         )
 
         health_images = [
-            pygame.image.load(f"Assets/health_{i}.png") for i in range(6)
+            pygame.image.load(resource_path(f"Assets/health_{i}.png")) for i in range(6)
         ]
         health_images = [
             pygame.transform.scale(img, (200, 70)) for img in health_images
@@ -63,36 +67,36 @@ class Assets:
 
         explosion_frames = []
         for i in range(1, 9):
-            img = pygame.image.load(f"Assets/explosion_{i}.png")
+            img = pygame.image.load(resource_path(f"Assets/explosion_{i}.png"))
             img = pygame.transform.scale(img, settings.EXPLOSION_IMG_SIZE)
             explosion_frames.append(img)
 
         title_img = pygame.transform.scale(
-            pygame.image.load("Assets/title.png"), settings.TITLE_IMG_SIZE
+            pygame.image.load(resource_path("Assets/title.png")), settings.TITLE_IMG_SIZE
         )
         play_img = pygame.transform.scale(
-            pygame.image.load("Assets/play.png"), settings.PLAY_IMG_SIZE
+            pygame.image.load(resource_path("Assets/play.png")), settings.PLAY_IMG_SIZE
         )
         options_img = pygame.transform.scale(
-            pygame.image.load("Assets/options.png"), settings.OPTIONS_IMG_SIZE
+            pygame.image.load(resource_path("Assets/options.png")), settings.OPTIONS_IMG_SIZE
         )
         exit_img = pygame.transform.scale(
-            pygame.image.load("Assets/exit.png"), settings.EXIT_IMG_SIZE
+            pygame.image.load(resource_path("Assets/exit.png")), settings.EXIT_IMG_SIZE
         )
         pause_img = pygame.transform.scale(
-            pygame.image.load("Assets/menu.png"), settings.PAUSE_IMG_SIZE
+            pygame.image.load(resource_path("Assets/menu.png")), settings.PAUSE_IMG_SIZE
         )
         continue_img = pygame.transform.scale(
-            pygame.image.load("Assets/continue.png"), settings.CONTINUE_IMG_SIZE
+            pygame.image.load(resource_path("Assets/continue.png")), settings.CONTINUE_IMG_SIZE
         )
         quit_img = pygame.transform.scale(
-            pygame.image.load("Assets/quit.png"), settings.QUIT_IMG_SIZE
+            pygame.image.load(resource_path("Assets/quit.png")), settings.QUIT_IMG_SIZE
         )
         restart_img = pygame.transform.scale(
-            pygame.image.load("Assets/restart.png"), settings.RESTART_IMG_SIZE
+            pygame.image.load(resource_path("Assets/restart.png")), settings.RESTART_IMG_SIZE
         )
         quit_gameover_img = pygame.transform.scale(
-            pygame.image.load("Assets/quitt.png"), settings.QUIT_GAMEOVER_IMG_SIZE
+            pygame.image.load(resource_path("Assets/quitt.png")), settings.QUIT_GAMEOVER_IMG_SIZE
         )
 
         return cls(

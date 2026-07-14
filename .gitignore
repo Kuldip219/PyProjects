@@ -45,3 +45,30 @@ Game projects/X_Hunter/__pycache__/menus.cpython-312.pyc
 Game projects/X_Hunter/__pycache__/player.cpython-312.pyc
 Game projects/X_Hunter/__pycache__/settings.cpython-312.pyc
 Game projects/X_Hunter/__pycache__/ui.cpython-312.pyc
+Game projects/X_Hunter/__pycache__/resource_path.cpython-312.pyc
+Game projects/X_Hunter/build/main/Analysis-00.toc
+Game projects/X_Hunter/build/main/base_library.zip
+Game projects/X_Hunter/build/main/EXE-00.toc
+Game projects/X_Hunter/build/main/localpycs/pyimod01_archive.pyc
+Game projects/X_Hunter/build/main/localpycs/pyimod02_importers.pyc
+Game projects/X_Hunter/build/main/localpycs/pyimod03_ctypes.pyc
+Game projects/X_Hunter/build/main/localpycs/struct.pyc
+Game projects/X_Hunter/build/main/localpycs/pyimod04_pywin32.pyc
+Game projects/X_Hunter/build/main/main.pkg
+Game projects/X_Hunter/build/main/PKG-00.toc
+Game projects/X_Hunter/build/main/PYZ-00.pyz
+Game projects/X_Hunter/build/main/PYZ-00.toc
+Game projects/X_Hunter/build/main/warn-main.txt
+Game projects/X_Hunter/dist/main.exe
+Game projects/X_Hunter/main.spec
+*.toc
+*.pyc
+*.txt
+*.pyz
+*.zip
+*.exe
+*.pkg
+*.pyd
+*.dll
+Game projects/X_Hunter/dist/X Hunter/_internal/pygame/pygame_icon.bmp
+Game projects/X_Hunter/X Hunter.spec
