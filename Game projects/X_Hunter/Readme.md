@@ -15,20 +15,7 @@ This project was created to strengthen my skills in Python game development, obj
 
 ## 📷 Screenshots
 
-```
-# Main Menu
-
-![Main Menu](Screenshots/main_menu.png)
-
-# Gameplay
-
-![Gameplay](Screenshots/gameplay.png)
-
-# Game Over
-
-![Game Over](Screenshots/pause_menu.png)
-
-```
+![Main_Menu](Screenshots/main_menu.png) ![Gameplay](Screenshots/gameplay.png) ![Pause_Menu](Screenshots/pause_menu.png)
 
 ---
 
