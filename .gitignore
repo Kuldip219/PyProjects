@@ -72,3 +72,4 @@ Game projects/X_Hunter/main.spec
 *.dll
 Game projects/X_Hunter/dist/X Hunter/_internal/pygame/pygame_icon.bmp
 Game projects/X_Hunter/X Hunter.spec
+Game projects/X_Hunter/build/X Hunter/xref-X Hunter.html
